@@ -7,15 +7,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.example.demo.model.ErrorHandler;
+
+import com.example.demo.model.Errors;
 
 @RestControllerAdvice
 public class ExceptionHandler {
 	@Autowired
-	ErrorHandler handler;
+	Errors handler;
 	
 	@org.springframework.web.bind.annotation.ExceptionHandler(SQLIntegrityConstraintViolationException.class)
-	public ResponseEntity<ErrorHandler> handleConstraintViolationException(SQLIntegrityConstraintViolationException exception){
+	public ResponseEntity<Errors> handleConstraintViolationException(SQLIntegrityConstraintViolationException exception){
 		handler.setErrorCode("5000");
 		handler.setErrorMessage(exception.getMessage().replace("Column '", "").replace("'", ""));
 		return new ResponseEntity<>(handler,HttpStatus.INTERNAL_SERVER_ERROR);
