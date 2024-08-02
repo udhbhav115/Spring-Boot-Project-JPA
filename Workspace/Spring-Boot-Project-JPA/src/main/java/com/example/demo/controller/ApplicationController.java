@@ -10,13 +10,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.enitity.Employee;
 import com.example.demo.service.EmployeeService;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class ApplicationController {
 	@Autowired
 	EmployeeService employeeService;
 	
 	@PostMapping("/add/employee")
-	public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee){
+	public ResponseEntity<Employee> addEmployee(@Valid @RequestBody Employee employee){
 		Employee savedEmployee = employeeService.addEmployee(employee);
 		return new ResponseEntity<>(savedEmployee,HttpStatus.OK);
 	}
