@@ -3,3 +3,4 @@ This project covers the below topics
 2. Pagination
 3. API Should be responsible to send both JSON and XML
 4. Controller Advice
+5. Caching
