@@ -1,23 +1,34 @@
 package com.example.demo.enitity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @JacksonXmlRootElement(localName = "employee")
 public class Employee {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	@NotEmpty(message = "Name should not be empty")
-	private String name;
-	@NotEmpty(message = "Role should not be empty")
-	private String role;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @NotEmpty(message = "Name should not be empty")
+    private String name;
+    
+    @NotEmpty(message = "Role should not be empty")
+    private String role;
+    
+    @ManyToOne
+    @JoinColumn(name = "department_id", nullable = false)
+    
+    private Department department;
+
 
 	public Long getId() {
 		return id;
