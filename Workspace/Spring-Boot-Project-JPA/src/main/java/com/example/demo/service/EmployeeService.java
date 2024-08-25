@@ -23,10 +23,16 @@ public class EmployeeService {
 	public List<Employee> getAll(){
 		return employeeRespository.findAll();
 	}
+	
+	public List<Employee> getByRole(String role){
+		return employeeRespository.getByRole(role);
+	}
 
 	public List<Employee> getPagenationEmployees(int page, int size) {
 		PageRequest pages = PageRequest.of(page, size);
 		Page<Employee> page2 = employeeRespository.findAll(pages);
 		return page2.getContent();
 	}
+	
+	
 }
